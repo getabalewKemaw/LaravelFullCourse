@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -98,4 +100,19 @@ Route::prefix("/admin")->group(function(){
 Route::fallback(function(){
     return "OOps there is not maching u r result please check where u press the link ";
 });
+
+Route::get("/sum/{a}/{b}",function($a,$b){
+    return "the sum is :".$a+$b;
+})->whereNumber(['a','b']);;
 // get all the routes usign the php artisam php artisan route:list
+
+Route::get('/cars',[App\Http\Controllers\CarController::class,'index']);
+Route::get("/showcar",App\Http\Controllers\ShowCarController::class);
+// creating  the route for the resources
+
+Route::resource('/products',App\Http\Controllers\ProdController::class);// u can use the only  and  and execep to filter the methods in the   resooure the controller
+
+// craeting  the routes for my math cal controller
+Route::get("/sum2/{a}/{b}",[App\Http\Controllers\MathCalController::class,'Add'])->whereNumber(['a','b']);
+Route::get("/diffrence/{a}/{b}",[App\Http\Controllers\MathCalController::class,'Substract'])->whereNumber(['a','b']);
+Route::get('/',[HomeController::class,'index'])->name('home');
