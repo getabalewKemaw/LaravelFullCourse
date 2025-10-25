@@ -1,22 +1,23 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
-Route::get('/', function () {
-    return Inertia::render('welcome', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
-})->name('home');
+// Route::get('/', function () {
+//     return Inertia::render('welcome', [
+//         'canRegister' => Features::enabled(Features::registration()),
+//     ]);
+// })->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::get('dashboard', function () {
+//         return Inertia::render('dashboard');
+//     })->name('dashboard');
+// });
 
 // Route::get('/about',function(){
 //     $person=["name"=>"getabalew","age"=>23];
@@ -25,8 +26,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //     return view('about');
 
 // });
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::view('/about-us','about')->name(('about'));;
-require __DIR__.'/settings.php';
+// require __DIR__.'/settings.php';
 //route paarmeters
 Route::get("/products/{id}",function($id){
     return  "Product id is : ".$id;
@@ -116,3 +121,13 @@ Route::resource('/products',App\Http\Controllers\ProdController::class);// u can
 Route::get("/sum2/{a}/{b}",[App\Http\Controllers\MathCalController::class,'Add'])->whereNumber(['a','b']);
 Route::get("/diffrence/{a}/{b}",[App\Http\Controllers\MathCalController::class,'Substract'])->whereNumber(['a','b']);
 Route::get('/',[HomeController::class,'index'])->name('home');
+
+//for the form class practicing the csrf 
+Route::get('/submit-form',[FormController::class,'showForm']);
+Route::post('/submit-form',[FormController::class,'handleForm']);
+
+
+// the laravel routing componet allow  all charcters except  / to be present on the route parameter so if we need to do that
+// Route::get('/search/{query}',function(string $query){
+//     return "Search results for: $query";
+// })->where('query','.*');
