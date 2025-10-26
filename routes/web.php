@@ -131,3 +131,15 @@ Route::post('/submit-form',[FormController::class,'handleForm']);
 // Route::get('/search/{query}',function(string $query){
 //     return "Search results for: $query";
 // })->where('query','.*');
+
+
+
+
+Route::get('/profileGetch', function () {
+    return "Secret profile page of getabalew";
+})->middleware('token'); // using alias
+
+
+Route::get('/api/data', function () {
+    return response()->json(['data'=>'ok']);
+})->middleware('token');

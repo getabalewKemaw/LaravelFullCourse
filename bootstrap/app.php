@@ -17,11 +17,24 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::middleware('api')
             ->prefix('api')
             ->group(base_path('routes/custom_routes.php'));
+              Route::middleware('web')
+        ->group(base_path('routes/web.php'));
+
         }
     )
     
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
+
+            // alias for route usage
+    $middleware->alias([
+        'token' => \App\Http\Middleware\EnsureTokenIsValid::class,
+    ]);
+
+      // optionally add to api group for all API routes
+    $middleware->api(prepend: [
+        \App\Http\Middleware\EnsureTokenIsValid::class,
+    ]);
 
         $middleware->web(append: [
             HandleAppearance::class,
