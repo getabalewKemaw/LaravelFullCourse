@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\BasiccsController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SingleAction;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -34,18 +38,18 @@ use Laravel\Fortify\Features;
 Route::view('/about-us','about')->name(('about'));;
 // require __DIR__.'/settings.php';
 //route paarmeters
-Route::get("/products/{id}",function($id){
-    return  "Product id is : ".$id;
-});
+// Route::get("/products/{id}",function($id){
+//     return  "Product id is : ".$id;
+// });
 //simple com,plex examples
 
-Route::get("/products/{id}/reviews/{reviewId}",function($id,$reviewId){
-    return  "Product id is : ".$id." and review id is : ".$reviewId;
-});
+// Route::get("/products/{id}/reviews/{reviewId}",function($id,$reviewId){
+//     return  "Product id is : ".$id." and review id is : ".$reviewId;
+// });
 // route optional parameters 
-Route::get("/products/catagory/{category?}",function($category=null){
-  return "products with category :$category";
-});
+// Route::get("/products/catagory/{category?}",function($category=null){
+//   return "products with category :$category";
+// });
 //some valiodation
 Route::get("/users/{id}",function($id){
 return "UserName is :$id";
@@ -116,7 +120,7 @@ Route::get('/cars',[App\Http\Controllers\CarController::class,'index']);
 Route::get("/showcar",App\Http\Controllers\ShowCarController::class);
 // creating  the route for the resources
 
-Route::resource('/products',App\Http\Controllers\ProdController::class);// u can use the only  and  and execep to filter the methods in the   resooure the controller
+// Route::resource('/products',App\Http\Controllers\ProdController::class);// u can use the only  and  and execep to filter the methods in the   resooure the controller
 
 // craeting  the routes for my math cal controller
 Route::get("/sum2/{a}/{b}",[App\Http\Controllers\MathCalController::class,'Add'])->whereNumber(['a','b']);
@@ -147,3 +151,27 @@ Route::get('/api/data', function () {
 token');
 
 Route::get('/hello',[HelloController::class,'sayHello']);
+
+
+Route::controller(BasiccsController::class)->group(function(){
+
+
+    Route::get('/header','Header');
+    Route::get('/maintask','MainTask');
+    Route::get('/contact','contact');
+});
+
+Route::get('/single',SingleAction::class);
+
+
+
+// Resource route for products
+Route::resource('products', ProductController::class);
+
+// Nested resource for reviews under a product
+Route::resource('products.reviews', ReviewController::class);
+
+// Example of renaming parameters
+Route::resource('items', ProductController::class)->parameters([
+    'items' => 'product_item'
+]);
