@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+     // we can declare a shared data to the view blade  so we can acessa  from what ever u wna t
+
+     View::share('nameG',"getabalew kemaw amare");
     }
 }

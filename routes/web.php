@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\HelloController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -142,4 +143,7 @@ Route::get('/profileGetch', function () {
 
 Route::get('/api/data', function () {
     return response()->json(['data'=>'ok']);
-})->middleware('token');
+})->middleware('P
+token');
+
+Route::get('/hello',[HelloController::class,'sayHello']);

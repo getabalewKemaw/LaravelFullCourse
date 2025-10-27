@@ -14,6 +14,9 @@ class HomeController extends Controller
         if(!View::exists("main.home")){
             dump("the view does not exists");
         }
-        return view("main.home");
+        return view("main.home",[
+            "name"=>'<b>GETABALEW<b>',
+            "age"=>23
+        ])->with("date",date("Y-m-d"));
      }
 }
