@@ -51,3 +51,12 @@ DELETE	/products/{product}	destroy()	Delete
  product
 
  we can replace the products with what ever th what ever u want
+
+ -> the scoped  isniure that the larvel automatciccally check s the relantionships  
+ -> imagine u post  a vedio in youtube then u can see the comments on that vedio
+ -> so here we can say that the comment belongs to the vedio and vedio has many comments
+ -> now when we fetch the data from database we can get all the comments related to that vedio by using this scope method
+
+ -> if u wann add another suplmeenratry resource controllers   u shoild define those routes before u call the rate;resources methods
+
+ -> a slug is  human friendly url identifier for a page  or a blog post or anything else that has a unique id
