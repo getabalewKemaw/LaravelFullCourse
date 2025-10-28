@@ -175,3 +175,7 @@ Route::resource('products.reviews', ReviewController::class);
 Route::resource('items', ProductController::class)->parameters([
     'items' => 'product_item'
 ]);
+
+Route::get('/helloGetch',function(){
+   return response()->json(['message'=>"It says hello getch from the response objects"],200)->header('Content-Type','text/plain');
+});
