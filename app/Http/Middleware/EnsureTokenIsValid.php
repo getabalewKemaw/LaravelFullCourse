@@ -16,14 +16,14 @@ class EnsureTokenIsValid
     public function handle(Request $request, Closure $next): Response
     {
 
-        $token = $request->header('X-API-TOKEN') ?? $request->input('token');
+      $token = $request->bearerToken();
         if ($token !== "my-secret-token") {
             if ($request->wantsJson() || $request->is('api/*')) {
                 return response()->json(['message' => 'the token is exprired  or invalid token']);
             }
             return redirect('/about-us');
 
-        }
+        } 
         return $next($request);
 
     }

@@ -13,14 +13,12 @@ return Application::configure(basePath: dirname(__DIR__))
         api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
-        using:function(){
+   /*      using: function () {
+            // Only load custom routes if you have them
             Route::middleware('api')
-            ->prefix('api')
-            ->group(base_path('routes/custom_routes.php'));
-              Route::middleware('web')
-        ->group(base_path('routes/web.php'));
-
-        }
+                ->prefix('api')
+                ->group(base_path('routes/custom_routes.php'));
+        } */
     )
     
     ->withMiddleware(function (Middleware $middleware) {
