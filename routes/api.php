@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\SessionController;
+
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\PostController;
 
@@ -31,6 +33,22 @@ Route::prefix('users')->group(function () {
         ->middleware('signed'); // Protect signed route
 });
 
+
+
+Route::prefix('session')->group(function () {
+    Route::post('/login', [SessionController::class, 'login']);                  // create session (auth sim)
+    Route::post('/logout', [SessionController::class, 'logout']);                // invalidate session
+    Route::get('/profile', [SessionController::class, 'profile']);              // read session user
+    Route::post('/regenerate', [SessionController::class, 'regenerate']);       // regenerate ID
+    Route::post('/invalidate', [SessionController::class, 'invalidate']);       // invalidate session (regenerate+flush)
+    Route::post('/cart/add', [SessionController::class, 'addToCart']);          // push value into session array
+    Route::get('/cart', [SessionController::class, 'viewCart']);                // read cart
+    Route::post('/flash', [SessionController::class, 'flashMessage']);          // set flash
+    Route::get('/flash', [SessionController::class, 'getFlash']);              // get flash
+    Route::post('/cache/put', [SessionController::class, 'sessionCachePut']);  // put value into session cache
+    Route::get('/cache/get', [SessionController::class, 'sessionCacheGet']);
+
+});
 
 
 
