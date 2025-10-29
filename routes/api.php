@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\FeedbackController;
-
+use App\Http\Controllers\Api\PostController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -14,6 +14,22 @@ Route::get('/test',function(){
     return response()->json(['message'=>"api is working"]);
 });
 // to test these  visit /api/test
+
+
+Route::prefix('posts')->group(function () {
+    Route::get('/', [PostController::class, 'index']);                 // GET all posts
+    Route::get('/{post}', [PostController::class, 'show'])->name('posts.show'); // Named route
+    Route::post('/share/{post}', [PostController::class, 'share']);    // Generate share link
+});
+
+
+//   post api for mastering the all  about url generations
+Route::prefix('users')->group(function () {
+    Route::post('/unsubscribe-link/{user}', [PostController::class, 'sendUnsubscribeLink']);
+    Route::get('/unsubscribe/{user}', [PostController::class, 'unsubscribe'])
+        ->name('unsubscribe')
+        ->middleware('signed'); // Protect signed route
+});
 
 
 

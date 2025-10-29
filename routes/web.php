@@ -4,6 +4,8 @@ use App\Http\Controllers\BasiccsController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HelloController;
+use App\Http\Controllers\PostController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SingleAction;
 use App\Http\Controllers\ProductController;
@@ -179,3 +181,26 @@ Route::resource('items', ProductController::class)->parameters([
 Route::get('/helloGetch',function(){
    return response()->json(['message'=>"It says hello getch from the response objects"],200)->header('Content-Type','text/plain');
 });
+
+
+//  laravel url generations using the query  methods
+
+Route::get('/query',function(){
+   return  url()->query('/input',['search'=>'larvelApi']);
+   return url()->query('/posts', ['columns' => ['title', 'body']]);
+
+   // Get the current URL without the query string...
+ return url()->current();
+ 
+// Get the current URL including the query string...
+ return url()->full();
+ 
+});
+
+
+
+//   post sharing and  unsubcribe systemng u for mastering url generations
+
+
+
+
