@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ValidationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
@@ -52,6 +53,8 @@ Route::prefix('session')->group(function () {
 
 
 
+
+
 Route::get('/feedback', [FeedbackController::class, 'index']);          // JSON Response
 Route::post('/feedback', [FeedbackController::class, 'store']);         // JSON + Status
 Route::get('/feedback/{id}', [FeedbackController::class, 'show']);      // Response + Header
@@ -67,3 +70,7 @@ Route::post('/users', [UserController::class, 'store']);
 Route::post('/users/upload', [UserController::class, 'upload']);
 Route::get('/users/headers', [UserController::class, 'headers']);
 Route::post('/users/info', [UserController::class, 'info']);
+
+
+// these is all about validations in php
+Route::post('/validator',[ValidationController::class,'register']);

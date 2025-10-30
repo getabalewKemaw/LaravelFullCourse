@@ -167,3 +167,7 @@ Some proxies may buffer; set Cache-Control: no-cache and disable buffers when ne
 
 
 and also in these we a use a streamDownload() when we want to dynamically generated  csva nd zip format 
+
+-> it is better to store the validation  logics inside the form Request and finnnaly authorize that 
+
+so instead of writing all those in the same controller we can write those in the request class itself
