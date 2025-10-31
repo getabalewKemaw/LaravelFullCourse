@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\ValidationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -74,3 +75,11 @@ Route::post('/users/info', [UserController::class, 'info']);
 
 // these is all about validations in php
 Route::post('/validator',[ValidationController::class,'register']);
+
+
+
+// a simple book api for mastering the php artisan console using the tinker  
+
+
+
+Route::apiResource('books', BookController::class);

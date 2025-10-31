@@ -41,5 +41,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+
+        // in these we  can report  execeotion  using the  report methods
+
+     
     })->create();
