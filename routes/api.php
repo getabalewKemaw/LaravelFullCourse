@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\Post1Controller;
 use App\Http\Controllers\ValidationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -83,3 +84,7 @@ Route::post('/validator',[ValidationController::class,'register']);
 
 
 Route::apiResource('books', BookController::class);
+
+
+Route::get('/posts1', [Post1Controller::class, 'index']);
+Route::post('/posts1', [Post1Controller::class, 'store']);
