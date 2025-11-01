@@ -88,3 +88,10 @@ Route::apiResource('books', BookController::class);
 
 Route::get('/posts1', [Post1Controller::class, 'index']);
 Route::post('/posts1', [Post1Controller::class, 'store']);
+
+
+// all about the Lazy collections
+
+use App\Http\Controllers\UserExportController;
+
+Route::get('/users/export', [UserExportController::class, 'export']);

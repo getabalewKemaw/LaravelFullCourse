@@ -204,3 +204,49 @@ Route::get('/query',function(){
 
 
 
+
+
+// todays learnign is alll about laravel collection
+//   a collectioiin is  an array of data which is used to manipulate the data easily
+Route::get('/collect',function(){
+   $collection=collect([1,2,3,4])
+   ->map(fn($item)=>$item*2)
+   ->filter(fn($item)=>$item>1);
+//    dd($collection);
+});
+
+Route::get('/coll2',function(){
+    $products = collect([
+    ['name' => 'Laptop', 'price' => 2000, 'stock' => 5],
+    ['name' => 'Phone', 'price' => 800, 'stock' => 0],
+    ['name' => 'Mouse', 'price' => 50, 'stock' => 10],
+]);
+ //do the ff 
+//  Now you want to:
+// Filter products that are in stock
+// Get only the names
+// Sort by price descending
+
+$available=$products->where('stock','>',0)
+  ->sortByDesc('price')
+  ->pluck('name');
+
+//   dd($available);
+
+//  some built in function in collections
+
+// map
+$data=collect([1,2,3])->map(fn($i)=>$i*2);
+// dd($data);
+// 
+// pluck it extraxts the specfic colums  from a table or some thigns
+
+$plucks=collect(['name'=>'gecho','email'=>"gech12kemaw"]);
+$nameOfThePr=$plucks->pluck('name');
+dd($nameOfThePr);
+
+
+
+
+
+});
