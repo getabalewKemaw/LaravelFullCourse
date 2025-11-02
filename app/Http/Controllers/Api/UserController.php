@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use App\Events\UserRegistered;
+
 use Illuminate\Support\Facades\Log;
 
 
@@ -43,15 +45,35 @@ class UserController extends Controller
                 'name' => $name,
                 'email' => $email,
                 'active' => $isActive,
-                'ip' => $request->ip(),
+                'ipP' => $request->ip(),
             ]
         ]);
     }
+
+
 
     /**
      * Handle user query (GET /api/users)
      * Demonstrates query(), path(), url(), fullUrl(), routeIs(), etc.
      */
+
+      public function register(Request $request)
+    {
+        // Simulate user creation
+        $user = [
+            'id' => rand(1000, 9999),
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+
+        // Log creation
+        Log::info("✅ User registered: " . $user['email']);
+
+        // Fire the event
+        UserRegistered::dispatch($user);
+
+        return response()->json(['message' => 'User registered successfully!']);
+    }
     public function index(Request $request): JsonResponse
     {
         $page = $request->query('page', 1);

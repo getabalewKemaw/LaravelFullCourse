@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\Post1Controller;
 use App\Http\Controllers\ValidationController;
@@ -104,3 +105,19 @@ Route::get('/users/export', [UserExportController::class, 'export']);
 Route::get('/stats', [AnalyticsController::class, 'index']);
 Route::post('/track', [AnalayticsController::class, 'track']);
 
+
+
+Route::post('/register1',[UserController::class,'register']);
+
+
+//all about file handling 
+
+Route::prefix('/files')->group(function () {
+    Route::post('/upload', [FileController::class, 'upload']);
+    Route::get('/list', [FileController::class, 'listFiles']);
+    Route::get('/download/{filename}', [FileController::class, 'download']);
+    Route::get('/temp-url/{filename}', [FileController::class, 'temporaryUrl']);
+    Route::post('/move/{filename}', [FileController::class, 'moveFile']);
+    Route::post('/copy/{filename}', [FileController::class, 'copyFile']);
+    Route::delete('/delete/{filename}', [FileController::class, 'deleteFile']);
+});
