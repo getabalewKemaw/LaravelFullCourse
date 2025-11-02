@@ -5,6 +5,12 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
+use App\Contracts\PaymentContract;
+use App\Services\StripePaymentService;
+
+
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $this->app->singleton(\App\Http\Middleware\RequestLogger::class);
+           $this->app->bind(PaymentContract::class, StripePaymentService::class);
+
 
     }
 

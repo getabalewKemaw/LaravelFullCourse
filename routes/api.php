@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\Post1Controller;
 use App\Http\Controllers\ValidationController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Api\SessionController;
 
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\AnalayticsController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -95,3 +97,10 @@ Route::post('/posts1', [Post1Controller::class, 'store']);
 use App\Http\Controllers\UserExportController;
 
 Route::get('/users/export', [UserExportController::class, 'export']);
+
+
+// simulation of laravel concurrency
+
+Route::get('/stats', [AnalyticsController::class, 'index']);
+Route::post('/track', [AnalayticsController::class, 'track']);
+
