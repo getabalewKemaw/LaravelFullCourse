@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\Post1Controller;
 use App\Http\Controllers\ValidationController;
+use App\Http\Controllers\WeatherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
@@ -121,3 +122,7 @@ Route::prefix('/files')->group(function () {
     Route::post('/copy/{filename}', [FileController::class, 'copyFile']);
     Route::delete('/delete/{filename}', [FileController::class, 'deleteFile']);
 });
+
+// the ff are alla bout the http clinets  it include  wether tracking dashboards
+
+Route::post('/weather', [WeatherController::class, 'fetch']);

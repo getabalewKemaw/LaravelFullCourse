@@ -16,6 +16,13 @@ class EventServiceProvider extends ServiceProvider
     \App\Listeners\AdminNotificationSubscriber::class,
 ];
 
+protected $listenere = [
+    \App\Events\WeatherRequested::class => [
+        \App\Listeners\LogWeatherRequest::class,
+    ],
+];
+
+
     /**
      * Register services.
      */
