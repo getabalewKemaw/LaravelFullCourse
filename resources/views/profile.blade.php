@@ -1,2 +1,0 @@
-<h1>These  is  a user profile pages   </h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae animi labore ullam voluptas debitis, rem obcaecati possimus! Eum voluptatibus ipsa nulla consectetur, odio tempora fugiat laudantium dignissimos aliquid illum ratione?</p>

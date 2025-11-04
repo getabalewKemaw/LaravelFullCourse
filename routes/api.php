@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\Api\FileController;
+use App\Http\Controllers\Api\LocalizationController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\Post1Controller;
 use App\Http\Controllers\ValidationController;
@@ -126,3 +127,11 @@ Route::prefix('/files')->group(function () {
 // the ff are alla bout the http clinets  it include  wether tracking dashboards
 
 Route::post('/weather', [WeatherController::class, 'fetch']);
+
+
+// all about localization and translation  usign the laravel lanf property 
+
+
+Route::get('/welcome', [LocalizationController::class, 'welcome']);
+Route::get('/order', [LocalizationController::class, 'order']);
+Route::get('/notifications', [LocalizationController::class, 'notifications']);
