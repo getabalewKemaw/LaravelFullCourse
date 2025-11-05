@@ -7,10 +7,17 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\Post1Controller;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\WeatherController;
+use App\Models\User;
+use App\Notifications\UserAlertNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\SessionController;
+
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SimpleMail;
+
 
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\PostController;
@@ -135,3 +142,37 @@ Route::post('/weather', [WeatherController::class, 'fetch']);
 Route::get('/welcome', [LocalizationController::class, 'welcome']);
 Route::get('/order', [LocalizationController::class, 'order']);
 Route::get('/notifications', [LocalizationController::class, 'notifications']);
+
+
+//mailign in  laravel using the  smtp serve
+
+
+
+
+Route::post('/send-email', function (Illuminate\Http\Request $request) {
+    $validated = $request->validate([
+        'email' => 'required|email',
+        'message' => 'required|string|max:500',
+    ]);
+
+    Mail::to($validated['email'])->send(new SimpleMail($validated));
+
+    return response()->json(['status' => '✅ Email sent successfully!']);
+});
+
+
+
+// all about notification
+
+Route::post('/notify', function () {
+    $user = User::first(); // simple: send to first user
+    $message = request('message', 'This is a test notification!');
+    
+    $user->notify(new UserAlertNotification($message));
+
+    return response()->json([
+        'status' => 'Notification sent!',
+        'to' => $user->email,
+        'message' => $message
+    ]);
+});
