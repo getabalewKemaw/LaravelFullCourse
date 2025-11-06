@@ -176,3 +176,8 @@ Route::post('/notify', function () {
         'message' => $message
     ]);
 });
+
+
+// all about quee in  laravel for the porpsoe of  to remove  the delays   and for the porpose of  to handle the long running tasks 
+
+Route::post('/quee',[UserController::class,'register1']);

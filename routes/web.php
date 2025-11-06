@@ -250,3 +250,21 @@ dd($nameOfThePr);
 
 
 });
+
+
+// all about processesin laravels
+
+Route::get('/process',function (){
+       $result=Process::run("php artisan migrate");
+       dd($result);
+});
+
+// pipelines in process are used to pass diffrent prosess at a a time  onnce that means we can pipe those one lets say
+
+Route::get('/pipe',function(){
+  $res=Process::pipe(
+      ["ls -la",
+      "grep public"]
+  );
+  dd($res);
+});

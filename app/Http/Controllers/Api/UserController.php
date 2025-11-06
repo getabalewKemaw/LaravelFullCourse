@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendWelcomeEmail;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Events\UserRegistered;
@@ -154,4 +155,23 @@ class UserController extends Controller
             'input' => $request->all(),
         ]);
     }
+
+
+public function register1(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email'
+    ]);
+
+    // Imagine you save the user
+    // User::create([...]);
+
+    // Dispatch job to queue
+    SendWelcomeEmail::dispatch($request->email)->afterCommit();
+
+    return response()->json([
+        'message' => 'User registered successfully! Welcome email is being sent in background.'
+    ]);
+}
+
 }
