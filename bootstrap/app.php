@@ -1,5 +1,8 @@
 <?php
 
+
+use Illuminate\Support\Facades\Log;
+use Illuminate\Console\Scheduling\Schedule;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\SetLocale;
@@ -50,4 +53,25 @@ return Application::configure(basePath: dirname(__DIR__))
         // in these we  can report  execeotion  using the  report methods
 
      
-    })->create();
+    })
+       ->withSchedule(function (Schedule $schedule) {
+        $schedule->command('logs:clean')
+            ->everyMinute()
+            ->withoutOverlapping()
+            ->runInBackground()
+            ->timezone('Africa/Addis_Ababa')
+            ->before(function () {
+                Log::info('🕒 [Scheduler] Log cleanup about to start...');
+            })
+            ->after(function () {
+                Log::info('✅ [Scheduler] Log cleanup finished.');
+            })
+            ->onSuccess(function () {
+                Log::info('🎉 [Scheduler] Cleanup succeeded!');
+            })
+            ->onFailure(function () {
+                Log::error('❌ [Scheduler] Cleanup failed!');
+            });
+    })
+    
+    ->create();

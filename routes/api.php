@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\LocalizationController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\Post1Controller;
+use App\Http\Controllers\RateLimitDemoController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\WeatherController;
 use App\Models\User;
@@ -181,3 +182,19 @@ Route::post('/notify', function () {
 // all about quee in  laravel for the porpsoe of  to remove  the delays   and for the porpose of  to handle the long running tasks 
 
 Route::post('/quee',[UserController::class,'register1']);
+
+
+// usign the rate limiter in laravel for the limiting the number of requests  and for security porposes
+
+
+Route::get('/send-message', [RateLimitDemoController::class, 'sendMessage']);
+Route::get('/reset-limit', [RateLimitDemoController::class, 'reset']);
+
+// all about task schedulign in laravel it is basicallyused for  doing some repetitive tasks every time  (we can customize the times)
+
+
+Route::get('/trigger-cleanup', function () {
+    Artisan::call('logs:clean');
+    Log::info('🧹 [Manual API] Log cleanup triggered manually!');
+    return response()->json(['message' => 'Cleanup command executed manually.']);
+});
