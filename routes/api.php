@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\LocalizationController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\Post1Controller;
+use App\Http\Controllers\PostGechController;
 use App\Http\Controllers\RateLimitDemoController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\WeatherController;
@@ -197,4 +198,21 @@ Route::get('/trigger-cleanup', function () {
     Artisan::call('logs:clean');
     Log::info('🧹 [Manual API] Log cleanup triggered manually!');
     return response()->json(['message' => 'Cleanup command executed manually.']);
+});
+
+// all about  authorization 
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/posts', [PostGechController::class, 'index']);
+    Route::get('/posts/{post}', [PostGechController::class, 'show']);
+    Route::post('/posts', [PostGechController::class, 'store']);
+    Route::put('/posts/{post}', [PostGechController::class, 'update']);
+    Route::delete('/posts/{post}', [PostGechController::class, 'destroy']);
+
+    // Route middleware example
+    Route::get('/posts/{post}/delete', [PostGechController::class, 'destroy'])
+        ->middleware('can:delete,post');
+
+    Route::get('/manage-posts', [PostGechController::class, 'manage']);
 });

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BasiccsController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\GechController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\PostController;
 
@@ -268,3 +269,7 @@ Route::get('/pipe',function(){
   );
   dd($res);
 });
+
+//all aboutthee elqoeunt models in laraveks 
+
+Route::get('/datas',[GechController::class,'index']);
