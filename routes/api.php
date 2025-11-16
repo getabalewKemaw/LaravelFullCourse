@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\LocalizationController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\Post1Controller;
 use App\Http\Controllers\PostGechController;
+use App\Http\Controllers\Product1Controller;
 use App\Http\Controllers\RateLimitDemoController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\WeatherController;
@@ -180,7 +181,7 @@ Route::post('/notify', function () {
 });
 
 
-// all about quee in  laravel for the porpsoe of  to remove  the delays   and for the porpose of  to handle the long running tasks 
+// all about quee in  laravel for thhe porpsoe of  to remove  the delays   and for the porpose of  to handle the long running tasks 
 
 Route::post('/quee',[UserController::class,'register1']);
 
@@ -216,3 +217,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/manage-posts', [PostGechController::class, 'manage']);
 });
+
+// practicing on  mutuatora accessros and  cast in laravell
+
+
+Route::post('/products', [Product1Controller::class, 'store']);
+Route::get('/products',  [Product1Controller::class, 'index']);
+Route::get('/products/{product}', [Product1Controller::class, 'show']);
