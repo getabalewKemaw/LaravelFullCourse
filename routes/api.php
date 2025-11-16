@@ -4,6 +4,7 @@ use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\LocalizationController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Post1Controller;
 use App\Http\Controllers\PostGechController;
 use App\Http\Controllers\Product1Controller;
@@ -224,3 +225,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/products', [Product1Controller::class, 'store']);
 Route::get('/products',  [Product1Controller::class, 'index']);
 Route::get('/products/{product}', [Product1Controller::class, 'show']);
+
+// all about the api resource in eloquent models 
+Route::apiResource('categories', CategoryController::class);
