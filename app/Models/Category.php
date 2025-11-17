@@ -17,6 +17,12 @@ class Category extends Model
         'description',
     ];
 
+    // relation ships
+
+    public  function products(){
+        return $this->hasMany(Product::class);
+    }
+
 
     // Always store name in lowercase, present it as Title Case
     protected function name(): Attribute

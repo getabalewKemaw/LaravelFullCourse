@@ -18,6 +18,7 @@ return new class extends Migration
             $table->json('metadata')->nullable();
             $table->date('released_at')->nullable();
             $table->text('secret_notes')->nullable();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

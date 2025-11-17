@@ -225,6 +225,5 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/products', [Product1Controller::class, 'store']);
 Route::get('/products',  [Product1Controller::class, 'index']);
 Route::get('/products/{product}', [Product1Controller::class, 'show']);
-
 // all about the api resource in eloquent models 
 Route::apiResource('categories', CategoryController::class);

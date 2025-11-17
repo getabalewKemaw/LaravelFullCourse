@@ -18,8 +18,8 @@ return new class extends Migration
              $table->string('description')->nullable();
              $table->softDeletes();
 
-            $table->timestamps();
-         $table->index('slug');
+              $table->timestamps();
+            $table->index('slug');
 
         });
     }
